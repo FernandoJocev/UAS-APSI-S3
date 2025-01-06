@@ -1,0 +1,40 @@
+/* ? Global CSS */
+input {
+  box-shadow: inset;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 8px 32px;
+  transition: all ease-in-out 150ms;
+  outline: none;
+}
+
+input:hover {
+  border: solid 1px rgba(27, 27, 125, 0.915);
+}
+
+input:focus {
+  border: solid 1px rgba(27, 27, 125, 0.915);
+}
+
+/* ? Login Card CSS */
+.login-card .middle-section p::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 50%);
+  height: 1px;
+  width: 35%;
+}
+
+.login-card .middle-section p::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 50%);
+  height: 1px;
+  width: 35%;
+}
