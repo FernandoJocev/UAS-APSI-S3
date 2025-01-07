@@ -1,3 +1,1 @@
-const JWTSecret = 'HilangTersembunyi';
-
-export default { JWTSecret };
+export const JWTSecret = 'HilangTersembunyi';

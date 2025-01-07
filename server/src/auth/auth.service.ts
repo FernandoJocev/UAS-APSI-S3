@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { TestUsersService } from '../test-users/test-users.service';
 import { JwtService } from '@nestjs/jwt';
+import { JWTSecret } from './constants';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,11 @@ export class AuthService {
           throw new UnauthorizedException();
         }
 
-        return { access_token: await this.JwtService.signAsync(user) };
+        return {
+          access_token: await this.JwtService.signAsync(user, {
+            secret: JWTSecret,
+          }),
+        };
       } catch (e) {
         throw new e();
       }

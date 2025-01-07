@@ -20,8 +20,8 @@ export class TicketService {
     return ticket;
   }
 
-  async buyTicket(request: Record<string, any>, id: number) {
-    return await this.Tickets.buyTicket(request, id);
+  async buyTicket(request: Record<string, any>, id: number, token?: string) {
+    return await this.Tickets.buyTicket(request, id, token);
   }
 
   async getHistory() {

@@ -81,13 +81,13 @@ export class TestTicketService {
     return this.tickets.find((ticket) => ticket.id === id);
   }
 
-  async buyTicket(request: Record<string, any>, id: number) {
+  async buyTicket(request: Record<string, any>, id: number, token?: string) {
     const ticket = this.tickets.find((ticket) => ticket.id === id);
 
     if (ticket.tersedia > 0) {
       ticket.tersedia -= request.jlh_penumpang;
 
-      await this.history.addHistory(request, ticket);
+      await this.history.addHistory(request, ticket, token);
 
       return JSON.parse('{"message": "Berhasil memesan tiket"}');
     }

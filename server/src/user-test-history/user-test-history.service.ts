@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 interface TicketInterface {
   id: number;
@@ -18,8 +19,17 @@ interface HistoryInterface {
   qty: number;
 }
 
+export interface UserInterface {
+  id?: number;
+  name?: string;
+  email?: string;
+  password?: string;
+}
+
 @Injectable()
 export class UserTestHistoryService {
+  constructor(private JWTService: JwtService) {}
+
   private readonly history = [
     {
       id: 1,
@@ -29,16 +39,25 @@ export class UserTestHistoryService {
     },
   ];
 
+  async decrypt(token: string): Promise<UserInterface> {
+    return await this.JWTService.verify(token.split(' ')[1]);
+  }
+
   async getHistories() {
     return this.history;
   }
 
-  async addHistory(request: Record<string, any>, ticket: TicketInterface) {
+  async addHistory(
+    request: Record<string, any>,
+    ticket: TicketInterface,
+    token?: string,
+  ) {
     let obj = {} as HistoryInterface;
+    const user = await this.decrypt(token);
     let id = 1;
 
     obj['id'] = id += 1;
-    obj['user_id'] = request.token;
+    obj['user_id'] = user.id;
     obj['tiket_id'] = ticket.id;
     obj['qty'] = request.jlh_penumpang;
 
