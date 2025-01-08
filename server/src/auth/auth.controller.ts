@@ -5,6 +5,7 @@ import {
   Body,
   Post,
   Get,
+  Headers,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
@@ -20,7 +21,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Get('/verify')
-  verifyToken(@Body() req: Record<string, any>) {
-    return this.authService.verifyToken(req.token);
+  verifyToken(@Headers('Authorization') headers?: string) {
+    return this.authService.verifyToken(headers.split(' ')[1]);
   }
 }

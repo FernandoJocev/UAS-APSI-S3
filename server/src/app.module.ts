@@ -10,6 +10,7 @@ import { TicketModule } from './ticket/ticket.module';
 import { TicketController } from './ticket/ticket.controller';
 import { TicketService } from './ticket/ticket.service';
 import { UserTestHistoryModule } from './user-test-history/user-test-history.module';
+import { TestTicketService } from './test-ticket/test-ticket.service';
 
 @Module({
   imports: [
@@ -20,7 +21,13 @@ import { UserTestHistoryModule } from './user-test-history/user-test-history.mod
     UserTestHistoryModule,
   ],
   controllers: [AppController, AuthController, TicketController],
-  providers: [AppService, AuthService, TicketService],
+  providers: [
+    AppService,
+    AuthService,
+    TicketService,
+    TestTicketService,
+    UserTestHistoryModule,
+  ],
   exports: [AppService],
 })
 export class AppModule {}

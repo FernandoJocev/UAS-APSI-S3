@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { TestTicketService } from './../test-ticket/test-ticket.service';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 interface TicketInterface {
@@ -19,7 +20,7 @@ interface HistoryInterface {
   qty: number;
 }
 
-export interface UserInterface {
+interface UserInterface {
   id?: number;
   name?: string;
   email?: string;
@@ -28,7 +29,11 @@ export interface UserInterface {
 
 @Injectable()
 export class UserTestHistoryService {
-  constructor(private JWTService: JwtService) {}
+  constructor(
+    private JWTService: JwtService,
+    @Inject(forwardRef(() => TestTicketService))
+    private readonly Ticket: TestTicketService,
+  ) {}
 
   private readonly history = [
     {
@@ -43,8 +48,14 @@ export class UserTestHistoryService {
     return await this.JWTService.verify(token.split(' ')[1]);
   }
 
-  async getHistories() {
-    return this.history;
+  async getHistories(token: string) {
+    const user: UserInterface = await this.JWTService.verify(
+      token.split(' ')[1],
+    );
+
+    let histories: HistoryInterface[] = [];
+
+    this.history.forEach((element) => {});
   }
 
   async addHistory(

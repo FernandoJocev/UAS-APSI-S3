@@ -23,8 +23,14 @@ export class TicketController {
 
   @HttpCode(HttpStatus.OK)
   @Get('/history')
-  history() {
-    return this.ticketService.getHistory();
+  history(@Headers('Authorization') token?: string) {
+    return this.ticketService.getHistory(token);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Get('/get/:id')
+  search(@Param() id: any): Promise<TicketInterface> {
+    return this.ticketService.findTicket(parseInt(id.id));
   }
 
   @HttpCode(HttpStatus.OK)
@@ -35,11 +41,5 @@ export class TicketController {
     @Headers('Authorization') token?: string,
   ) {
     return this.ticketService.buyTicket(request, parseInt(id.id), token);
-  }
-
-  @HttpCode(HttpStatus.OK)
-  @Get(':id')
-  search(@Param() id: any): Promise<TicketInterface> {
-    return this.ticketService.findTicket(parseInt(id.id));
   }
 }

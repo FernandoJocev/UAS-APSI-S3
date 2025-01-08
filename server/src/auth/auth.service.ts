@@ -37,8 +37,8 @@ export class AuthService {
       const verify = await this.JwtService.verifyAsync(token);
 
       return verify;
-    } catch (e) {
-      throw new e();
+    } catch {
+      throw new Error();
     }
   }
 }
