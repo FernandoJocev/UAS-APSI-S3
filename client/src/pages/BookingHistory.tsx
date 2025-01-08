@@ -15,13 +15,13 @@ const Rupiah = Intl.NumberFormat('id-ID', {
   currency: 'IDR',
 })
 
-const BeliTiket = () => {
+const BookingHistory = () => {
   const params = useParams()
   const [ticket, setTicket] = useState<TicketInterface>()
   const [jlhPenumpang, setJlhPenumpang] = useState<number>(0)
 
   const getTicket = async () => {
-    await API.get(`${params.id}`)
+    await API.get('history')
       .then((result) => {
         setTicket(result.data)
       })
@@ -133,4 +133,4 @@ const BeliTiket = () => {
   )
 }
 
-export default BeliTiket
+export default BookingHistory

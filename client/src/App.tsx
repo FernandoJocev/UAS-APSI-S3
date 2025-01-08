@@ -11,6 +11,7 @@ function App() {
           <Route path='/masuk' element={<Pages.Login />}></Route>
           <Route path='/daftar' element={<Pages.Login />}></Route>
           <Route path='/beli/:id' element={<Pages.BeliTiket />}></Route>
+          <Route path='/history' element={<Pages.BookingHistory />}></Route>
         </Routes>
       </BrowserRouter>
     </>
