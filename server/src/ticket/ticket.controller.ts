@@ -40,6 +40,6 @@ export class TicketController {
     @Param() id: any,
     @Headers('Authorization') token?: string,
   ) {
-    return this.ticketService.buyTicket(request, parseInt(id.id), token);
+    return this.ticketService.buyTicket(request.data, parseInt(id.id), token);
   }
 }

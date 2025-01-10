@@ -85,14 +85,18 @@ export class TestTicketService {
   }
 
   async buyTicket(request: Record<string, any>, id: number, token?: string) {
-    const ticket = this.tickets.find((ticket) => ticket.id === id);
+    try {
+      const ticket = this.tickets.find((ticket) => ticket.id === id);
 
-    if (ticket.tersedia > 0) {
-      ticket.tersedia -= request.jlh_penumpang;
+      if (ticket.tersedia > 0) {
+        ticket.tersedia -= request.jlh_penumpang;
 
-      await this.history.addHistory(request, ticket, token);
+        await this.history.addHistory(request, ticket, token);
 
-      return JSON.parse('{"message": "Berhasil memesan tiket"}');
+        return JSON.parse('{"message": "Berhasil memesan tiket"}');
+      }
+    } catch {
+      throw new Error();
     }
   }
 }

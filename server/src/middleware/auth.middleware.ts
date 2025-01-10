@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { NextFunction, Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
@@ -12,7 +13,8 @@ export class AuthMiddleware implements NestMiddleware {
 
   use(req: Request, res: Response, next: NextFunction) {
     try {
-      if (this.JWTService.verify(req.headers.authorization.split(' ')[1])) {
+      const token = req.headers.authorization.split(' ')[1];
+      if (jwtDecode(token) || this.JWTService.verify(token)) {
         return next();
       }
     } catch {
@@ -20,3 +22,4 @@ export class AuthMiddleware implements NestMiddleware {
     }
   }
 }
+
