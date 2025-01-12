@@ -36,10 +36,11 @@ const BeliTiket = () => {
         },
       }
     )
-      .then(() => {
+      .then((result) => {
+        console.log(result)
         Swal.fire({
           icon: 'success',
-          title: 'Tiket berhasil dipesan!',
+          title: result.data.message,
           showConfirmButton: true,
         }).then((confirmed) => {
           if (confirmed) {
@@ -59,7 +60,7 @@ const BeliTiket = () => {
 
   useEffect(() => {
     const getTicket = async () => {
-      await API.get(`${params.id}`)
+      await API.get(`get/${params.id}`)
         .then((result) => {
           setTicket(result.data)
         })

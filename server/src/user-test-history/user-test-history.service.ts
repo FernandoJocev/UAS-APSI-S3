@@ -21,7 +21,7 @@ interface HistoryInterface {
   status: string;
 }
 
-export interface UserInterface {
+interface UserInterface {
   id?: number;
   name?: string;
   email?: string;

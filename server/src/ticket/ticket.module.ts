@@ -20,8 +20,8 @@ export class TicketModule implements NestModule {
     consumer
       .apply(AuthMiddleware)
       .exclude(
-        { path: 'ticket/:id', method: RequestMethod.GET },
         { path: 'ticket/all', method: RequestMethod.GET },
+        { path: 'ticket/get/:id', method: RequestMethod.GET },
       )
       .forRoutes('ticket');
   }

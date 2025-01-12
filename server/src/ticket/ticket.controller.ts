@@ -38,7 +38,7 @@ export class TicketController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Get(':id')
+  @Get('/get/:id')
   search(@Param() id: any): Promise<TicketInterface> {
     return this.ticketService.findTicket(parseInt(id.id));
   }

@@ -5,7 +5,7 @@ import { checkToken } from '../utils/CheckToken'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router'
 import axios, { AxiosRequestConfig } from 'axios'
-import { AuthInterface } from '../interfaces/authForm'
+import { AuthInterface } from '../interfaces/AuthForm'
 
 const LoginCard = () => {
   const API = axios.create({
@@ -35,7 +35,7 @@ const LoginCard = () => {
 
         localStorage.setItem('token', result.data.access_token)
 
-        return
+        return (window.location.href = '/?logged_in=true')
       })
       .catch((err) => {
         return Swal.fire({
@@ -45,7 +45,6 @@ const LoginCard = () => {
           showConfirmButton: true,
         })
       })
-    return (window.location.href = '/?logged_in=true')
   }
 
   useEffect(() => {
