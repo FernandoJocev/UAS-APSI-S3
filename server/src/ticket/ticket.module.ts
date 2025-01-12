@@ -22,7 +22,6 @@ export class TicketModule implements NestModule {
       .exclude(
         { path: 'ticket/:id', method: RequestMethod.GET },
         { path: 'ticket/all', method: RequestMethod.GET },
-        { path: 'ticket/history', method: RequestMethod.GET },
       )
       .forRoutes('ticket');
   }

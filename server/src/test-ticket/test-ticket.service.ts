@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { UserTestHistoryService } from 'src/user-test-history/user-test-history.service';
 
 interface TicketInterface {
@@ -14,7 +14,10 @@ interface TicketInterface {
 
 @Injectable()
 export class TestTicketService {
-  constructor(private history: UserTestHistoryService) {}
+  constructor(
+    @Inject(forwardRef(() => UserTestHistoryService))
+    private history: UserTestHistoryService,
+  ) {}
 
   private readonly tickets = [
     {

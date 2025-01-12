@@ -5,7 +5,7 @@ import { checkToken } from '../utils/CheckToken'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router'
 import axios, { AxiosRequestConfig } from 'axios'
-import { authInterface } from '../interfaces/authForm'
+import { AuthInterface } from '../interfaces/authForm'
 
 const LoginCard = () => {
   const API = axios.create({
@@ -13,7 +13,7 @@ const LoginCard = () => {
     headers: { 'Content-Type': 'application/json' },
   })
 
-  const [formData, setFormData] = useState<authInterface>({
+  const [formData, setFormData] = useState<AuthInterface>({
     email: '',
     password: '',
   })
@@ -27,7 +27,11 @@ const LoginCard = () => {
 
     await API.post('login', new FormData(e.currentTarget))
       .then(async (result: AxiosRequestConfig) => {
-        await API.get('verify', result.data.access_token)
+        await API.get('verify', {
+          headers: {
+            Authorization: 'Bearer ' + result.data.access_token,
+          },
+        })
 
         localStorage.setItem('token', result.data.access_token)
 
@@ -54,9 +58,7 @@ const LoginCard = () => {
     <div className='login-card w-[35%]'>
       <div className='flex flex-col items-center w-full p-[24px] gap-y-[18px] bg-white rounded-[24px]'>
         <div className='flex flex-col gap-y-[8px] items-center'>
-          <h1 className='text-secondary-title font-bold'>
-            Masuk
-          </h1>
+          <h1 className='text-secondary-title font-bold'>Masuk</h1>
 
           <p className='text-p'>
             Belum punya akun?

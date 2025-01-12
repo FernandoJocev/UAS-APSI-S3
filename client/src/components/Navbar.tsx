@@ -1,12 +1,12 @@
 import { jwtDecode } from 'jwt-decode'
 import { useEffect, useState } from 'react'
 import token from '../utils/Token'
-import { userInterface } from '../interfaces/oauth'
+import { UserInterface } from '../interfaces/oauth'
 import { checkToken } from '../utils/CheckToken'
 import { Link } from 'react-router'
 
 const Navbar = () => {
-  const [user, setUser] = useState<userInterface>()
+  const [user, setUser] = useState<UserInterface>()
 
   const getUser = () => {
     const user = jwtDecode(token!)

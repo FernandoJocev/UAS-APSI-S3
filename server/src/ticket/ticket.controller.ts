@@ -23,8 +23,8 @@ export class TicketController {
 
   @HttpCode(HttpStatus.OK)
   @Get('/history')
-  history() {
-    return this.ticketService.getHistory();
+  history(@Headers('Authorization') token?: string) {
+    return this.ticketService.getHistory(token);
   }
 
   @HttpCode(HttpStatus.OK)
@@ -34,7 +34,7 @@ export class TicketController {
     @Param() id: any,
     @Headers('Authorization') token?: string,
   ) {
-    return this.ticketService.buyTicket(request, parseInt(id.id), token);
+    return this.ticketService.buyTicket(request.data, parseInt(id.id), token);
   }
 
   @HttpCode(HttpStatus.OK)

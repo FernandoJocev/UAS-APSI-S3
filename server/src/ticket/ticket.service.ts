@@ -24,7 +24,7 @@ export class TicketService {
     return await this.Tickets.buyTicket(request, id, token);
   }
 
-  async getHistory() {
-    return await this.History.getHistories();
+  async getHistory(token: string) {
+    return await this.History.getHistories(token);
   }
 }

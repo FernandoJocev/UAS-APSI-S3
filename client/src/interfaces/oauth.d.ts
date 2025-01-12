@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export interface userInterface {
+export interface UserInterface {
   name?: string
   email?: string
   picture?: string

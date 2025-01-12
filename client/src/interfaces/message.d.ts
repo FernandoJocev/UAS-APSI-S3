@@ -1,4 +1,4 @@
-export interface messageInterface {
+export interface MessageInterface {
   message?: string
   status?: 'success' | 'error'
 }

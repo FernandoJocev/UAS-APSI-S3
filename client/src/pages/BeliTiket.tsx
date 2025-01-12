@@ -20,16 +20,6 @@ const BeliTiket = () => {
   const [ticket, setTicket] = useState<TicketInterface>()
   const [jlhPenumpang, setJlhPenumpang] = useState<number>(0)
 
-  const getTicket = async () => {
-    await API.get(`${params.id}`)
-      .then((result) => {
-        setTicket(result.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
   const buyTicket = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -68,8 +58,18 @@ const BeliTiket = () => {
   }
 
   useEffect(() => {
+    const getTicket = async () => {
+      await API.get(`${params.id}`)
+        .then((result) => {
+          setTicket(result.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
     getTicket()
-  }, [])
+  }, [params])
 
   return (
     <div className='flex flex-col gap-y-[48px] pt-[24px] pr-[48px] pb-[24px] pl-[48px]'>
@@ -99,7 +99,11 @@ const BeliTiket = () => {
             </div>
 
             <div className='flex flex-col justify-between h-full gap-y-2'>
-              <h1>{Rupiah.format(ticket?.harga)}</h1>
+              <h1>
+                {ticket?.harga
+                  ? Rupiah.format(ticket?.harga)
+                  : 'Harga belum ada.'}
+              </h1>
 
               <div className='flex items-center justify-between'>
                 <i
