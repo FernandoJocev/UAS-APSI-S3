@@ -1,5 +1,11 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { jwtDecode } from 'jwt-decode';
 import { TestTicketService } from 'src/test-ticket/test-ticket.service';
 
 interface TicketInterface {
@@ -54,7 +60,15 @@ export class UserTestHistoryService {
   ];
 
   async decrypt(token: string): Promise<UserInterface> {
-    return await this.JWTService.verify(token.split(' ')[1]);
+    try {
+      return await this.JWTService.verify(token.split(' ')[1]);
+    } catch {
+      try {
+        return await jwtDecode(token);
+      } catch {
+        throw new UnauthorizedException();
+      }
+    }
   }
 
   async getHistories(token: string) {

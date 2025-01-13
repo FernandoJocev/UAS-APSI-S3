@@ -12,13 +12,20 @@ export class AuthMiddleware implements NestMiddleware {
   constructor(private JWTService: JwtService) {}
 
   use(req: Request, res: Response, next: NextFunction) {
+    const token = req.headers.authorization.split(' ')[1];
+
     try {
-      const token = req.headers.authorization.split(' ')[1];
-      if (jwtDecode(token) || this.JWTService.verify(token)) {
+      if (this.JWTService.verify(token)) {
         return next();
       }
     } catch {
-      throw new UnauthorizedException();
+      try {
+        if (jwtDecode(token)) {
+          return next();
+        }
+      } catch {
+        throw new UnauthorizedException();
+      }
     }
   }
 }
