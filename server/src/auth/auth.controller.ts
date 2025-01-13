@@ -21,7 +21,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Get('/verify')
-  verifyToken(@Headers('Authorization') headers?: string) {
-    return this.authService.verifyToken(headers.split(' ')[1]);
+  verifyToken(@Headers('Authorization') token: string) {
+    return this.authService.verifyToken(token.split(' ')[1]);
   }
 }

@@ -1,4 +1,4 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { UserTestHistoryService } from 'src/user-test-history/user-test-history.service';
 
 interface TicketInterface {

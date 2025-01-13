@@ -28,12 +28,6 @@ export class TicketController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Get('/get/:id')
-  search(@Param() id: any): Promise<TicketInterface> {
-    return this.ticketService.findTicket(parseInt(id.id));
-  }
-
-  @HttpCode(HttpStatus.OK)
   @Post('/buy/:id')
   buy(
     @Body() request: Record<string, any>,
@@ -41,5 +35,11 @@ export class TicketController {
     @Headers('Authorization') token?: string,
   ) {
     return this.ticketService.buyTicket(request.data, parseInt(id.id), token);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Get('/get/:id')
+  search(@Param() id: any): Promise<TicketInterface> {
+    return this.ticketService.findTicket(parseInt(id.id));
   }
 }

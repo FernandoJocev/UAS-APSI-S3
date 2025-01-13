@@ -1,6 +1,6 @@
-import { TestTicketService } from './../test-ticket/test-ticket.service';
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { TestTicketService } from 'src/test-ticket/test-ticket.service';
 
 interface TicketInterface {
   id: number;
@@ -18,6 +18,7 @@ interface HistoryInterface {
   user_id: number;
   tiket_id: number;
   qty: number;
+  status: string;
 }
 
 interface UserInterface {
@@ -32,7 +33,7 @@ export class UserTestHistoryService {
   constructor(
     private JWTService: JwtService,
     @Inject(forwardRef(() => TestTicketService))
-    private readonly Ticket: TestTicketService,
+    private Ticket: TestTicketService,
   ) {}
 
   private readonly history = [
@@ -41,6 +42,14 @@ export class UserTestHistoryService {
       user_id: 1,
       tiket_id: 1,
       qty: 2,
+      status: 'Selesai',
+    },
+    {
+      id: 2,
+      user_id: 1,
+      tiket_id: 2,
+      qty: 2,
+      status: 'Segera berangkat',
     },
   ];
 
@@ -49,13 +58,42 @@ export class UserTestHistoryService {
   }
 
   async getHistories(token: string) {
-    const user: UserInterface = await this.JWTService.verify(
-      token.split(' ')[1],
-    );
+    try {
+      const user = await this.decrypt(token);
 
-    let histories: HistoryInterface[] = [];
+      const history: HistoryInterface[] = this.history.filter((history) => {
+        return history.user_id === user.id;
+      });
 
-    this.history.forEach((element) => {});
+      const histories = [];
+      for (const value of history) {
+        const ticket = await this.Ticket.findOne(value.tiket_id);
+        const obj = {};
+
+        // ? Set History
+        obj['id'] = value.id;
+        obj['user_id'] = value.user_id;
+        obj['qty'] = value.qty;
+        obj['status'] = value.status;
+
+        // ? Set Ticket
+        obj['tersedia'] = ticket.tersedia;
+        obj['nama_kapal'] = ticket.nama_kapal;
+        obj['tgl_berangkat'] = ticket.tgl_berangkat;
+        obj['jadwal'] = ticket.jadwal;
+        obj['harga'] = ticket.harga;
+        obj['kota_asal'] = ticket.kota_asal;
+        obj['kota_tujuan'] = ticket.kota_tujuan;
+
+        histories.push(obj);
+      }
+
+      histories.reverse();
+
+      return histories;
+    } catch {
+      throw new Error();
+    }
   }
 
   async addHistory(
@@ -71,6 +109,7 @@ export class UserTestHistoryService {
     obj['user_id'] = user.id;
     obj['tiket_id'] = ticket.id;
     obj['qty'] = request.jlh_penumpang;
+    obj['status'] = 'Segera berangkat';
 
     this.history.push(obj);
 
