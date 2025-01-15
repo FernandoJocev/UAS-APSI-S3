@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router'
 import token from '../../utils/Token'
 import { jwtDecode } from 'jwt-decode'
-import { UserInterface } from '../../interfaces/oAuth'
+import { UserInterface } from '../../interfaces/oauth'
 import Components from '../../utils/Components'
 
 const AuthGuard = () => {
