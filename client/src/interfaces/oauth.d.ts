@@ -4,5 +4,6 @@ export interface UserInterface {
   name?: string
   email?: string
   picture?: string
+  role?: string
   exp?: any
 }

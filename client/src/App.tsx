@@ -1,6 +1,8 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import Pages from './utils/Pages'
+import AuthGuard from './components/middlewares/AuthGuard'
+import Components from './utils/Components'
 
 function App() {
   return (
@@ -12,6 +14,17 @@ function App() {
           <Route path='/daftar' element={<Pages.Register />}></Route>
           <Route path='/beli/:id' element={<Pages.BeliTiket />}></Route>
           <Route path='/history' element={<Pages.BookingHistory />}></Route>
+
+          {/* Admin Pages */}
+          <Route path='/admin/' element={<AuthGuard />}>
+            <Route index element={<Pages.Dashboard />}></Route>
+            <Route
+              path='validasi-reservasi'
+              element={<Pages.ValidateTicket />}
+            ></Route>
+          </Route>
+
+          <Route path='*' element={<Components._404 />} />
         </Routes>
       </BrowserRouter>
     </>

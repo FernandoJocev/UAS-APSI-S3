@@ -71,6 +71,41 @@ export class UserTestHistoryService {
     }
   }
 
+  async all() {
+    try {
+      const history: HistoryInterface[] = this.history;
+
+      const histories = [];
+      for (const value of history) {
+        const ticket = await this.Ticket.findOne(value.tiket_id);
+        const obj = {};
+
+        // ? Set History
+        obj['id'] = value.id;
+        obj['user_id'] = value.user_id;
+        obj['qty'] = value.qty;
+        obj['status'] = value.status;
+
+        // ? Set Ticket
+        obj['tersedia'] = ticket.tersedia;
+        obj['nama_kapal'] = ticket.nama_kapal;
+        obj['tgl_berangkat'] = ticket.tgl_berangkat;
+        obj['jadwal'] = ticket.jadwal;
+        obj['harga'] = ticket.harga;
+        obj['kota_asal'] = ticket.kota_asal;
+        obj['kota_tujuan'] = ticket.kota_tujuan;
+
+        histories.push(obj);
+      }
+
+      histories.reverse();
+
+      return histories;
+    } catch {
+      throw new Error();
+    }
+  }
+
   async getHistories(token: string) {
     try {
       const user = await this.decrypt(token);

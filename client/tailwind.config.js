@@ -7,10 +7,10 @@ export default {
         3: 'repeat(3, auto)',
       },
       fontSize: {
-        'title': '28px',
+        title: '28px',
         'secondary-title': '24px',
-        'p': '14px',
-      }
+        p: '14px',
+      },
     },
   },
   plugins: [],

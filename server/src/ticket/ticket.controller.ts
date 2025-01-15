@@ -42,4 +42,11 @@ export class TicketController {
   search(@Param() id: any): Promise<TicketInterface> {
     return this.ticketService.findTicket(parseInt(id.id));
   }
+
+  // ? Admin Routes
+  @HttpCode(HttpStatus.OK)
+  @Get('/admin/all')
+  allAdmin() {
+    return this.ticketService.adminGetAllTicket();
+  }
 }

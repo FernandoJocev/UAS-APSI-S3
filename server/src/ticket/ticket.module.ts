@@ -9,6 +9,7 @@ import { TicketService } from './ticket.service';
 import { TestTicketModule } from '../test-ticket/test-ticket.module';
 import { UserTestHistoryModule } from '../user-test-history/user-test-history.module';
 import { AuthMiddleware } from '../middleware/auth.middleware';
+import { AdminMiddleware } from '../middleware/admin.middleware';
 
 @Module({
   imports: [TestTicketModule, UserTestHistoryModule],
@@ -22,7 +23,10 @@ export class TicketModule implements NestModule {
       .exclude(
         { path: 'ticket/all', method: RequestMethod.GET },
         { path: 'ticket/get/:id', method: RequestMethod.GET },
+        { path: 'ticket/admin', method: RequestMethod.ALL },
       )
       .forRoutes('ticket');
+
+    consumer.apply(AdminMiddleware).forRoutes('ticket/admin');
   }
 }

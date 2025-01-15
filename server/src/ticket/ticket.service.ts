@@ -27,4 +27,8 @@ export class TicketService {
   async getHistory(token: string) {
     return await this.History.getHistories(token);
   }
+
+  async adminGetAllTicket() {
+    return await this.History.all();
+  }
 }

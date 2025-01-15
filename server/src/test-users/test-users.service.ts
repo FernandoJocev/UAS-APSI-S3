@@ -5,6 +5,7 @@ export interface UserInterface {
   name?: string;
   email?: string;
   password?: string;
+  role?: string;
 }
 
 @Injectable()
@@ -15,6 +16,7 @@ export class TestUsersService {
       name: 'User 1',
       email: 'example1@gmail.com',
       password: '12345678',
+      role: 'user',
     },
 
     {
@@ -22,6 +24,7 @@ export class TestUsersService {
       name: 'User 2',
       email: 'example2@gmail.com',
       password: '12345678',
+      role: 'user',
     },
 
     {
@@ -29,6 +32,15 @@ export class TestUsersService {
       name: 'User 3',
       email: 'example3@gmail.com',
       password: '12345678',
+      role: 'user',
+    },
+
+    {
+      id: 4,
+      name: 'Peradminan Duniawi',
+      email: 'admin@gmail.com',
+      password: 'GGgemink',
+      role: 'admin',
     },
   ];
 
