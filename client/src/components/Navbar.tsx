@@ -1,7 +1,7 @@
 import { jwtDecode } from 'jwt-decode'
 import { useEffect, useState } from 'react'
 import token from '../utils/Token'
-import { UserInterface } from '../interfaces/oauth'
+import { UserInterface } from '../interfaces/oAuth'
 import { checkToken } from '../utils/CheckToken'
 import { Link } from 'react-router'
 
@@ -16,6 +16,9 @@ const Navbar = () => {
   useEffect(() => {
     if (checkToken() != null && checkToken() != 'expired') {
       getUser()
+    } else {
+      localStorage.removeItem('oauth_token')
+      localStorage.removeItem('token')
     }
   }, [])
 
@@ -41,6 +44,7 @@ const Navbar = () => {
             <img
               src={user.picture}
               alt='profile'
+              referrerPolicy='no-referrer'
               className='!w-[28px] rounded-full'
             />
 

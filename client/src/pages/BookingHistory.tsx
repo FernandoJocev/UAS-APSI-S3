@@ -5,7 +5,7 @@ import token from '../utils/Token'
 import { TicketHistoryInterface } from '../interfaces/TicketHistory'
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/ticket/',
+  baseURL: import.meta.env.VITE_API_URL,
 })
 
 const Rupiah = Intl.NumberFormat('id-ID', {
@@ -17,7 +17,7 @@ const BookingHistory = () => {
   const [histories, setHistory] = useState<TicketHistoryInterface[]>()
 
   const getHistory = async () => {
-    await API.get('history', { headers: { Authorization: 'Bearer ' + token } })
+    await API.get('ticket/history', { headers: { Authorization: 'Bearer ' + token } })
       .then((result) => {
         setHistory(result.data)
       })

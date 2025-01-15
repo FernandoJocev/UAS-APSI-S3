@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { TestUsersService } from '../test-users/test-users.service';
 import { JwtService } from '@nestjs/jwt';
 import { JWTSecret } from './constants';
@@ -24,8 +29,17 @@ export class AuthService {
             secret: JWTSecret,
           }),
         };
-      } catch (e) {
-        throw new e();
+      } catch (error) {
+        throw new HttpException(
+          {
+            status: HttpStatus.INTERNAL_SERVER_ERROR,
+            error: error,
+          },
+          HttpStatus.INTERNAL_SERVER_ERROR,
+          {
+            cause: error,
+          },
+        );
       }
     }
 

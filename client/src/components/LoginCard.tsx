@@ -9,7 +9,7 @@ import { AuthInterface } from '../interfaces/AuthForm'
 
 const LoginCard = () => {
   const API = axios.create({
-    baseURL: 'http://localhost:3000/auth/',
+    baseURL: import.meta.env.VITE_API_URL,
     headers: { 'Content-Type': 'application/json' },
   })
 
@@ -25,9 +25,9 @@ const LoginCard = () => {
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    await API.post('login', new FormData(e.currentTarget))
+    await API.post('auth/login', formData)
       .then(async (result: AxiosRequestConfig) => {
-        await API.get('verify', {
+        await API.get('auth/verify', {
           headers: {
             Authorization: 'Bearer ' + result.data.access_token,
           },
@@ -74,7 +74,7 @@ const LoginCard = () => {
               shape='pill'
               onSuccess={(credentialResponse) => {
                 localStorage.setItem('token', credentialResponse.credential!)
-                window.location.reload()
+                return (window.location.href = '/?logged_in=true')
               }}
               onError={() => {
                 Swal.fire({

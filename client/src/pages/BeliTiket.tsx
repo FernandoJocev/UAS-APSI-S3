@@ -1,13 +1,13 @@
 import { FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import Components from '../utils/Components'
-import { TicketInterface } from '../interfaces/ticket'
+import { TicketInterface } from '../interfaces/Ticket'
 import { useParams } from 'react-router'
 import Swal from 'sweetalert2'
 import token from '../utils/Token'
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/ticket/',
+  baseURL: import.meta.env.VITE_API_URL,
 })
 
 const Rupiah = Intl.NumberFormat('id-ID', {
@@ -24,7 +24,7 @@ const BeliTiket = () => {
     e.preventDefault()
 
     await API.post(
-      `buy/${params.id}`,
+      `ticket/buy/${params.id}`,
       {
         data: {
           jlh_penumpang: jlhPenumpang,
@@ -60,7 +60,7 @@ const BeliTiket = () => {
 
   useEffect(() => {
     const getTicket = async () => {
-      await API.get(`get/${params.id}`)
+      await API.get(`ticket/get/${params.id}`)
         .then((result) => {
           setTicket(result.data)
         })

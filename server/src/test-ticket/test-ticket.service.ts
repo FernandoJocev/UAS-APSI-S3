@@ -1,5 +1,5 @@
 import { Injectable, Inject, forwardRef } from '@nestjs/common';
-import { UserTestHistoryService } from 'src/user-test-history/user-test-history.service';
+import { UserTestHistoryService } from '../user-test-history/user-test-history.service';
 
 interface TicketInterface {
   id: number;

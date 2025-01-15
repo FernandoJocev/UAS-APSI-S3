@@ -1,6 +1,6 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TestTicketService } from './test-ticket.service';
-import { UserTestHistoryModule } from 'src/user-test-history/user-test-history.module';
+import { UserTestHistoryModule } from '../user-test-history/user-test-history.module';
 
 @Module({
   imports: [forwardRef(() => UserTestHistoryModule)],

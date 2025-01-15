@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { jwtDecode } from 'jwt-decode';
-import { TestTicketService } from 'src/test-ticket/test-ticket.service';
+import { TestTicketService } from '../test-ticket/test-ticket.service';
 
 interface TicketInterface {
   id: number;

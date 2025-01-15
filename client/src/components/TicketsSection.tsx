@@ -1,10 +1,10 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { TicketInterface } from '../interfaces/ticket'
+import { TicketInterface } from '../interfaces/Ticket'
 import { Link } from 'react-router'
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/ticket/',
+  baseURL: import.meta.env.VITE_API_URL,
 })
 
 const Rupiah = Intl.NumberFormat('id-ID', {
@@ -16,7 +16,7 @@ const TicketsSection = () => {
   const [tickets, setTickets] = useState<TicketInterface[]>([])
 
   const getTickets = async () => {
-    await API.get('all')
+    await API.get('ticket/all')
       .then((result) => {
         setTickets(result.data)
       })

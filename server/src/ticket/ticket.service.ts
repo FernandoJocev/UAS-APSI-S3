@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { TestTicketService } from '../test-ticket/test-ticket.service';
 import { TicketInterface } from './ticket';
-import { UserTestHistoryService } from 'src/user-test-history/user-test-history.service';
+import { UserTestHistoryService } from '../user-test-history/user-test-history.service';
 
 @Injectable()
 export class TicketService {
