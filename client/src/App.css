@@ -16,9 +16,43 @@ input:focus {
   border: solid 1px rgba(27, 27, 125, 0.915);
 }
 
+/* ? Keyframes */
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+/* ? Navbar CSS */
+#navbar .hide {
+  animation-name: hide !important;
+  animation-fill-mode: both;
+  animation-duration: 200ms;
+}
+
+#navbar #overlay {
+  animation-name: opacity;
+  animation-fill-mode: both;
+  animation-duration: 200ms;
+}
+
 /* ? Login Card CSS */
 .login-card .middle-section p::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 0;
@@ -29,7 +63,7 @@ input:focus {
 }
 
 .login-card .middle-section p::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   right: 0;
