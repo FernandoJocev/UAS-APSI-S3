@@ -5,7 +5,7 @@ import { checkToken } from '../utils/CheckToken'
 import Swal from 'sweetalert2'
 import { Link } from 'react-router'
 import axios, { AxiosRequestConfig } from 'axios'
-import { AuthInterface } from '../interfaces/AuthForm'
+import { AuthInterface } from '../interfaces/authForm'
 
 const RegisterCard = () => {
   const API = axios.create({

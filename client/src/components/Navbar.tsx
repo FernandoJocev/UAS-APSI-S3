@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import token from "../utils/Token";
-import { UserInterface } from "../interfaces/oAuth";
+import { UserInterface } from "../interfaces/oauth";
 import { checkToken } from "../utils/CheckToken";
 import { Link } from "react-router";
 

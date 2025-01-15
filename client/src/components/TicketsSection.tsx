@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { TicketInterface } from '../interfaces/Ticket'
+import { TicketInterface } from '../interfaces/ticket'
 import { Link } from 'react-router'
 
 const API = axios.create({

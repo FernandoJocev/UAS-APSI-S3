@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import Components from '../utils/Components'
-import { TicketInterface } from '../interfaces/Ticket'
+import { TicketInterface } from '../interfaces/ticket'
 import { useParams } from 'react-router'
 import Swal from 'sweetalert2'
 import token from '../utils/Token'
