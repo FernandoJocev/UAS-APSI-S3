@@ -10,7 +10,7 @@ import { TicketInterface } from "../../interfaces/ticket";
 import FormAddTicket from "../../components/admin/manage-ticket/FormAddTicket";
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL + "ticket/",
+  baseURL: import.meta.env.VITE_API_URL + "/ticket/",
   headers: { "Content-Type": "application/json" },
 });
 
@@ -105,7 +105,7 @@ const ManageTicket = () => {
   const [tickets, setTickets] = useState<TicketInterface[]>([]);
 
   const getTickets = async () => {
-    await API.get("/all")
+    await API.get("all")
       .then((result) => {
         setTickets(result.data);
       })
