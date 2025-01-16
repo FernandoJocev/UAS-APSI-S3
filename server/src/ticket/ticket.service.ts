@@ -10,6 +10,10 @@ export class TicketService {
     private History: UserTestHistoryService,
   ) {}
 
+  async test() {
+    return await this.History.test();
+  }
+
   async getAllTickets() {
     return await this.Tickets.all();
   }

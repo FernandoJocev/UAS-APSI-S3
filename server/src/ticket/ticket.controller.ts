@@ -16,6 +16,12 @@ export class TicketController {
   constructor(private ticketService: TicketService) {}
 
   @HttpCode(HttpStatus.OK)
+  @Get('/test')
+  test() {
+    return this.ticketService.test();
+  }
+
+  @HttpCode(HttpStatus.OK)
   @Get('/all')
   all() {
     return this.ticketService.getAllTickets();

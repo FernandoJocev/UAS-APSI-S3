@@ -32,6 +32,7 @@ interface UserInterface {
   name?: string;
   email?: string;
   password?: string;
+  role?: string;
 }
 
 @Injectable()
@@ -58,6 +59,10 @@ export class UserTestHistoryService {
       status: 'Segera berangkat',
     },
   ];
+
+  async test() {
+    return this.history;
+  }
 
   async decrypt(token: string): Promise<UserInterface> {
     try {
@@ -115,8 +120,9 @@ export class UserTestHistoryService {
       });
 
       const histories = [];
+
       for (const value of history) {
-        const ticket = await this.Ticket.findOne(value.tiket_id);
+        const ticket = await this.Ticket.findOne(Number(value.tiket_id));
         const obj = {};
 
         // ? Set History
@@ -154,7 +160,11 @@ export class UserTestHistoryService {
     const user = await this.decrypt(token);
     let id = 1;
 
-    obj['id'] = id += 1;
+    for (let i = 0; i < this.history.length; i++) {
+      id++;
+    }
+
+    obj['id'] = id;
     obj['user_id'] = user.id;
     obj['tiket_id'] = ticket.id;
     obj['qty'] = request.jlh_penumpang;

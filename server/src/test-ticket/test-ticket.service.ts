@@ -110,11 +110,11 @@ export class TestTicketService {
       }
 
       obj['id'] = id;
-      obj['tersedia'] = request.tersedia;
+      obj['tersedia'] = parseInt(request.tersedia);
       obj['nama_kapal'] = request.n_kapal;
       obj['tgl_berangkat'] = request.berangkat;
       obj['jadwal'] = request.berangkat + '-' + request.tiba;
-      obj['harga'] = request.harga;
+      obj['harga'] = parseInt(request.harga);
       obj['kota_asal'] = request.p_berangkat;
       obj['kota_tujuan'] = request.p_tujuan;
 
