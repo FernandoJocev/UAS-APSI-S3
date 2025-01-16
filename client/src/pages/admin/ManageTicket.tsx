@@ -105,7 +105,7 @@ const ManageTicket = () => {
   const [tickets, setTickets] = useState<TicketInterface[]>([]);
 
   const getTickets = async () => {
-    await API.get("all")
+    await API.get("/all")
       .then((result) => {
         setTickets(result.data);
       })
