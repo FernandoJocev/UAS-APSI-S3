@@ -127,4 +127,25 @@ export class TestTicketService {
       throw new Error();
     }
   }
+
+  async deleteTicket(id: number) {
+    try {
+      const tickets = [];
+
+      tickets.push(
+        this.tickets.filter((ticket) => {
+          return ticket.id != id;
+        }),
+      );
+
+      const response = {
+        message: 'Berhasil menghapus tiket!',
+        tickets: tickets,
+      };
+
+      return response;
+    } catch (e) {
+      throw new e();
+    }
+  }
 }

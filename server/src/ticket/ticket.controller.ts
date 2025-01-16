@@ -61,4 +61,10 @@ export class TicketController {
   adminAddTicket(@Body() request: Record<string, any>) {
     return this.ticketService.adminAddTicket(request);
   }
+
+  @HttpCode(HttpStatus.OK)
+  @Post('/admin/delete')
+  adminDeleteTicket(@Body() request: Record<string, any>) {
+    return this.ticketService.adminDeleteTicket(request.data.id);
+  }
 }

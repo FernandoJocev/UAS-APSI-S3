@@ -39,4 +39,8 @@ export class TicketService {
   async adminAddTicket(request: Record<string, any>) {
     return await this.Tickets.addTicket(request);
   }
+
+  async adminDeleteTicket(id: number) {
+    return await this.Tickets.deleteTicket(id);
+  }
 }

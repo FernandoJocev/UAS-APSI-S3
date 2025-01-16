@@ -146,8 +146,8 @@ export class UserTestHistoryService {
       histories.reverse();
 
       return histories;
-    } catch {
-      throw new Error();
+    } catch (e) {
+      throw new e();
     }
   }
 
