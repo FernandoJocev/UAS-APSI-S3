@@ -31,4 +31,8 @@ export class TicketService {
   async adminGetAllTicket() {
     return await this.History.all();
   }
+
+  async adminAddTicket(request: Record<string, any>) {
+    return await this.Tickets.addTicket(request);
+  }
 }

@@ -99,4 +99,32 @@ export class TestTicketService {
       throw new Error();
     }
   }
+
+  async addTicket(request: Record<string, any>) {
+    try {
+      let obj = {} as TicketInterface;
+      let id = 0;
+
+      do {
+        id++;
+      } while (this.tickets.length < this.tickets.length);
+
+      obj['id'] = id;
+      obj['tersedia'] = request.tersedia;
+      obj['nama_kapal'] = request.n_kapal;
+      obj['tgl_berangkat'] = request.berangkat;
+      obj['jadwal'] = request.berangkat + '-' + request.tiba;
+      obj['harga'] = request.harga;
+      obj['kota_asal'] = request.p_berangkat;
+      obj['kota_tujuan'] = request.p_tujuan;
+
+      this.tickets.push(obj);
+
+      obj = {} as TicketInterface;
+
+      return JSON.parse('{"message": "Berhasil menambahkan tiket!"}');
+    } catch {
+      throw new Error();
+    }
+  }
 }

@@ -46,7 +46,13 @@ export class TicketController {
   // ? Admin Routes
   @HttpCode(HttpStatus.OK)
   @Get('/admin/all')
-  allAdmin() {
+  adminAll() {
     return this.ticketService.adminGetAllTicket();
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Post('/admin/add')
+  adminAddTicket(@Body() request: Record<string, any>) {
+    return this.ticketService.adminAddTicket(request);
   }
 }
