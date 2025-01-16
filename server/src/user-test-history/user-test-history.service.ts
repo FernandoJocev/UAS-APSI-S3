@@ -61,10 +61,10 @@ export class UserTestHistoryService {
 
   async decrypt(token: string): Promise<UserInterface> {
     try {
-      return await this.JWTService.verify(token.split(' ')[1]);
+      return await this.JWTService.verifyAsync(token.split(' ')[1]);
     } catch {
       try {
-        return await jwtDecode(token);
+        return await jwtDecode(token.split(' ')[1]);
       } catch {
         throw new UnauthorizedException();
       }

@@ -103,11 +103,11 @@ export class TestTicketService {
   async addTicket(request: Record<string, any>) {
     try {
       let obj = {} as TicketInterface;
-      let id = 0;
+      let id = 1;
 
-      do {
+      for (let i = 0; i < this.tickets.length; i++) {
         id++;
-      } while (this.tickets.length < this.tickets.length);
+      }
 
       obj['id'] = id;
       obj['tersedia'] = request.tersedia;

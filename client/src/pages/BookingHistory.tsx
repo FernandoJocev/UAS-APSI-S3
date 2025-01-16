@@ -17,7 +17,7 @@ const BookingHistory = () => {
   const [histories, setHistory] = useState<TicketHistoryInterface[]>()
 
   const getHistory = async () => {
-    await API.get('ticket/history', { headers: { Authorization: 'Bearer ' + token } })
+    await API.get('/ticket/history', { headers: { Authorization: 'Bearer ' + token } })
       .then((result) => {
         setHistory(result.data)
       })
