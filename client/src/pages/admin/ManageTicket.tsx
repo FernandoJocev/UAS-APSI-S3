@@ -67,27 +67,46 @@ const ManageTicket = () => {
       })
   }
 
-  const deleteTicket = async (id: number) => {
-    await API.post(
-      'admin/delete',
-      {
-        data: {
-          id: id,
-        },
-      },
-      {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      }
-    )
-      .then((result) => {
-        setTickets(result.data.tickets)
-        Swal.fire({
-          icon: 'success',
-          title: result.data.message,
-          showConfirmButton: true,
-        })
+  const deleteTicket = (id: number) => {
+    Swal.fire({
+      icon: 'info',
+      title: 'Apakah anda yakin ingin menghapus tiket?',
+      showConfirmButton: true,
+      confirmButtonText: 'Hapus',
+      showCancelButton: true,
+      cancelButtonText: 'Batal',
+    })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          await API.post(
+            'admin/delete',
+            {
+              data: {
+                id: id,
+              },
+            },
+            {
+              headers: {
+                Authorization: 'Bearer ' + token,
+              },
+            }
+          )
+            .then((result) => {
+              setTickets(result.data.tickets[0])
+              Swal.fire({
+                icon: 'success',
+                title: result.data.message,
+                showConfirmButton: true,
+              })
+            })
+            .catch((err) => {
+              Swal.fire({
+                icon: 'error',
+                title: err,
+                showConfirmButton: true,
+              })
+            })
+        }
       })
       .catch((err) => {
         Swal.fire({

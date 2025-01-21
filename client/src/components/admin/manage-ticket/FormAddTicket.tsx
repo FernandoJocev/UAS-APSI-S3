@@ -127,7 +127,7 @@ const FormAddTicket: React.FC<FormAddTicketPropsInterface> = ({
         {/* End of Third Row */}
 
         {/* Fourth Row */}
-        <div className='grid grid-cols-3 gap-x-[24px]'>
+        <div className='grid grid-cols-2 gap-x-[24px]'>
           <div className='relative w-full flex flex-col gap-y-[12px]'>
             <label htmlFor='n_kapal'>Tarif Normal</label>
             <input
@@ -139,7 +139,7 @@ const FormAddTicket: React.FC<FormAddTicketPropsInterface> = ({
             />
           </div>
 
-          <div className='relative w-full flex flex-col gap-y-[12px]'>
+          {/* <div className='relative w-full flex flex-col gap-y-[12px]'>
             <label htmlFor='k_kapal'>Tarif Khusus (Opsional)</label>
             <input
               type='number'
@@ -147,7 +147,7 @@ const FormAddTicket: React.FC<FormAddTicketPropsInterface> = ({
               placeholder='Pilih kelas kapal'
               className='w-full text-p'
             />
-          </div>
+          </div> */}
 
           <div className='relative w-full flex flex-col gap-y-[12px]'>
             <label htmlFor='jlh_tersedia'>Keterangan (Opsional)</label>

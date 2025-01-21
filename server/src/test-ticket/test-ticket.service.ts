@@ -19,6 +19,8 @@ export class TestTicketService {
     private history: UserTestHistoryService,
   ) {}
 
+  private readonly excluded: number[] = [];
+
   private readonly tickets = [
     {
       id: 1,
@@ -132,11 +134,19 @@ export class TestTicketService {
     try {
       const tickets = [];
 
-      tickets.push(
-        this.tickets.filter((ticket) => {
-          return ticket.id != id;
-        }),
-      );
+      this.excluded.push(id);
+
+      const filtered = this.tickets.filter((ticket) => {
+        for (let i = 0; i < this.excluded.length; i++) {
+          if (ticket.id === this.excluded[i]) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      tickets.push(filtered);
 
       const response = {
         message: 'Berhasil menghapus tiket!',
