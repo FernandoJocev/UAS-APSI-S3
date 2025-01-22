@@ -20,7 +20,7 @@ const Rupiah = Intl.NumberFormat('id-ID', {
 })
 
 const ManageTicket = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true)
   const [ticket, setTicket] = useState<TicketInterface | null>()
 
   const showModal = () => {
@@ -33,10 +33,13 @@ const ManageTicket = () => {
   }
 
   const getTicket = async (id: number) => {
+    const title = document.getElementById('modal-title')!
+
     await API.get(`get/${id}`)
       .then((result) => {
         setTicket(result.data)
         setIsModalOpen(true)
+        title.innerHTML = 'Edit Tiket'
       })
       .catch((err) => {
         console.log(err)
@@ -45,26 +48,56 @@ const ManageTicket = () => {
 
   const addTicket = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const button = document.getElementById('submit-button')
 
-    await API.post('admin/add', new FormData(e.currentTarget), {
-      headers: { Authorization: 'Bearer ' + token },
-    })
-      .then((result) => {
-        getTickets()
+    if (button?.dataset.type === 'add') {
+      await API.post('admin/add', new FormData(e.currentTarget), {
+        headers: { Authorization: 'Bearer ' + token },
+      })
+        .then((result) => {
+          getTickets()
 
-        Swal.fire({
-          icon: 'success',
-          title: result.data.message,
-          showConfirmButton: true,
+          Swal.fire({
+            icon: 'success',
+            title: result.data.message,
+            showConfirmButton: true,
+          })
         })
-      })
-      .catch((err) => {
-        Swal.fire({
-          icon: 'error',
-          title: err,
-          showConfirmButton: true,
+        .catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: err,
+            showConfirmButton: true,
+          })
         })
+    } else if (button?.dataset.type === 'edit') {
+      await API.post('admin/edit', new FormData(e.currentTarget), {
+        headers: { Authorization: 'Bearer ' + token },
       })
+        .then((result) => {
+          setTicket(null)
+          getTickets()
+
+          Swal.fire({
+            icon: 'success',
+            title: result.data.message,
+            showConfirmButton: true,
+          })
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: err,
+            showConfirmButton: true,
+          })
+        })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error :(',
+        showConfirmButton: true,
+      })
+    }
   }
 
   const deleteTicket = (id: number) => {
@@ -178,6 +211,7 @@ const ManageTicket = () => {
   }
 
   useEffect(() => {
+    setIsModalOpen(false)
     getTickets()
   }, [])
 
@@ -217,7 +251,10 @@ const ManageTicket = () => {
             footer={() => <></>}
           >
             <div className='flex flex-col gap-y-[24px]'>
-              <h1 className='font-bold text-[27px] text-[#112F45]'>
+              <h1
+                id='modal-title'
+                className='font-bold text-[27px] text-[#112F45]'
+              >
                 Tambah Tiket
               </h1>
 

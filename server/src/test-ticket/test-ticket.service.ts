@@ -130,6 +130,26 @@ export class TestTicketService {
     }
   }
 
+  async editTicket(request: Record<string, any>) {
+    try {
+      const id: number = parseInt(request.id);
+
+      const idx = this.tickets.findIndex((ticket) => ticket.id === id);
+
+      this.tickets[idx].tersedia = parseInt(request.tersedia);
+      this.tickets[idx].nama_kapal = request.n_kapal;
+      this.tickets[idx].tgl_berangkat = request.berangkat;
+      this.tickets[idx].jadwal = request.berangkat + '-' + request.tiba;
+      this.tickets[idx].harga = parseInt(request.harga);
+      this.tickets[idx].kota_asal = request.p_berangkat;
+      this.tickets[idx].kota_tujuan = request.p_tujuan;
+
+      return JSON.parse('{"message": "Berhasil mengedit tiket!"}');
+    } catch (e) {
+      throw new e();
+    }
+  }
+
   async deleteTicket(id: number) {
     try {
       const tickets = [];

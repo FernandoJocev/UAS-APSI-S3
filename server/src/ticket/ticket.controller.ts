@@ -63,6 +63,12 @@ export class TicketController {
   }
 
   @HttpCode(HttpStatus.OK)
+  @Post('/admin/edit')
+  adminEditTicket(@Body() request: Record<string, any>) {
+    return this.ticketService.adminEditTicket(request);
+  }
+
+  @HttpCode(HttpStatus.OK)
   @Post('/admin/delete')
   adminDeleteTicket(@Body() request: Record<string, any>) {
     return this.ticketService.adminDeleteTicket(request.data.id);
