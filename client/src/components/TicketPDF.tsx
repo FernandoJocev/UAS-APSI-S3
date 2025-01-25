@@ -31,7 +31,7 @@ const TicketPDF = () => {
 
   return (
     <>
-      <h1>Ticket PDF</h1>
+      <h1>{ticket?.nama_kapal}</h1>
     </>
   )
 }
