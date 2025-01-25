@@ -10,7 +10,7 @@ const Overview = () => {
 
       <div className='grid grid-cols-3 gap-x-[16px]'>
         <div className='flex flex-col gap-y-[8px] border-solid border border-[#BABABA] rounded-[16px] pt-[16px] pr-[24px] pb-[16px] pl-[24px]'>
-          <h1 className='text-[12px] opacity-80'>Pendapatan</h1>
+          <h1 className='text-[12px] opacity-80 uppercase'>Pendapatan</h1>
 
           <h1 className='font-extrabold text-[27px]'>
             {Rupiah.format(1057567980)}
@@ -24,10 +24,10 @@ const Overview = () => {
         </div>
 
         <div className='flex flex-col gap-y-[8px] border-solid border border-[#BABABA] rounded-[16px] pt-[16px] pr-[24px] pb-[16px] pl-[24px]'>
-          <h1 className='text-[12px] opacity-80'>Pendapatan</h1>
+          <h1 className='text-[12px] opacity-80 uppercase'>Total Tiket Terjual</h1>
 
           <h1 className='font-extrabold text-[27px]'>
-            {Rupiah.format(1057567980)}
+            {new Intl.NumberFormat().format(99999)}
           </h1>
 
           <div className='flex items-center cursor-pointer text-[9px]'>
@@ -38,10 +38,10 @@ const Overview = () => {
         </div>
 
         <div className='flex flex-col gap-y-[8px] border-solid border border-[#BABABA] rounded-[16px] pt-[16px] pr-[24px] pb-[16px] pl-[24px]'>
-          <h1 className='text-[12px] opacity-80'>Pendapatan</h1>
+          <h1 className='text-[12px] opacity-80 uppercase'>Total Customer</h1>
 
           <h1 className='font-extrabold text-[27px]'>
-            {Rupiah.format(1057567980)}
+            {9999}
           </h1>
 
           <div className='flex items-center cursor-pointer text-[9px]'>

@@ -1,9 +1,4 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { TestUsersService } from '../test-users/test-users.service';
 import { JwtService } from '@nestjs/jwt';
 import { JWTSecret } from './constants';
@@ -16,12 +11,21 @@ export class AuthService {
   ) {}
 
   async singIn(email: string, password: string): Promise<any> {
-    const user = await this.findUser.findOne(email);
+    if (email != '' && password != '') {
+      const user = await this.findUser.findOne(email);
 
-    if (user != null) {
-      try {
+      if (user != null) {
         if (user.password !== password) {
-          throw new UnauthorizedException();
+          throw new HttpException(
+            {
+              status: HttpStatus.BAD_REQUEST,
+              error: 'Email atau password anda salah!',
+            },
+            HttpStatus.BAD_REQUEST,
+            {
+              cause: 'Email atau password anda salah!',
+            },
+          );
         }
 
         return {
@@ -29,21 +33,32 @@ export class AuthService {
             secret: JWTSecret,
           }),
         };
-      } catch (error) {
+      } else {
         throw new HttpException(
           {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: error,
+            status: HttpStatus.UNAUTHORIZED,
+            error: 'Email atau password anda salah!',
           },
-          HttpStatus.INTERNAL_SERVER_ERROR,
+          HttpStatus.UNAUTHORIZED,
           {
-            cause: error,
+            cause: 'Email atau password anda salah!',
           },
         );
       }
+    } else if (email === '' || password === '') {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: 'Email atau password tidak boleh kosong!',
+        },
+        HttpStatus.BAD_REQUEST,
+        {
+          cause: 'Email atau password tidak boleh kosong!',
+        },
+      );
+    } else {
+      throw new Error();
     }
-
-    return 'User Tidak Ditemukan';
   }
 
   async verifyToken(token: string): Promise<any> {

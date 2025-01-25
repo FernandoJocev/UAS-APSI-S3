@@ -34,9 +34,9 @@ const Navbar = () => {
       <div className="flex items-center">
         {user?.role === "admin" ? (
           <div className="flex mr-[18px] gap-x-[18px] font-[700] items-center">
-            <Link to={"/admin"}>Dasboard</Link>
+            <Link to={"/admin"}>Laporan Penjualan</Link>
 
-            <Link to={"/admin/validasi-reservasi"}>Validasi Reservasi</Link>
+            <Link to={"/admin/validasi-reservasi"}>Validasi Tiket</Link>
 
             <Link to={"/admin/kelola-tiket"}>Kelola Tiket</Link>
 

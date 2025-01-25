@@ -38,10 +38,11 @@ const LoginCard = () => {
         return (window.location.href = '/?logged_in=true')
       })
       .catch((err) => {
+        console.log(err)
         return Swal.fire({
           icon: 'error',
           title: 'Error :(',
-          text: err,
+          text: err.response.data.error,
           showConfirmButton: true,
         })
       })
