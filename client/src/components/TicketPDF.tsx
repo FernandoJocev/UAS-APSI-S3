@@ -1,4 +1,4 @@
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+// import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 import axios from 'axios'
 import token from '../utils/Token'
 import { useEffect, useState } from 'react'
